@@ -1,0 +1,16 @@
+Enter the number of generations (iterations) to run the GA: 3
+Enter 4 chromosomes (each 5 bits, only 0 or 1):
+Chromosome 1: 01100
+Chromosome 2: 11001
+Chromosome 3: 00101
+Chromosome 4: 10011
+
+Initial Population: ['01100', '11001', '00101', '10011']
+
+Generation 1: Best Chromosome = 11001, Fitness = 625
+Generation 2: Best Chromosome = 11011, Fitness = 729
+Generation 3: Best Chromosome = 11101, Fitness = 841
+
+Best solution after 3 generations: 11101 with fitness = 841
+
+=== Code Execution Successful ===
