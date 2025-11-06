@@ -1,0 +1,23 @@
+import itertools
+tasks = list(map(int, input("Enter task durations (space separated): ").split()))
+num_tasks = len(tasks)
+def completion_time(order):
+    total = 0
+    current = 0
+    for i in order:
+        current += tasks[i]
+        total += current
+    return total
+all_orders = list(itertools.permutations(range(num_tasks)))
+
+print("\nAll possible task orders and their completion times:\n")
+results = []
+for order in all_orders:
+    time = completion_time(order)
+    print(f"Order {list(order)} --> Completion Time = {time}")
+    results.append((order, time))
+
+alpha = min(results, key=lambda x: x[1])
+
+print("\nAlpha (Best Order):", list(alpha[0]))
+print(" Minimum Total Completion Time:", alpha[1])
