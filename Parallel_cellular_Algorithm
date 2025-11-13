@@ -1,0 +1,33 @@
+import numpy as np
+
+func_str = input("Enter the function f(x) (e.g., x**2 - 4*x + 4): ")
+grid_size = int(input("Enter grid size (e.g., 10 for 10x10 grid): "))
+iterations = int(input("Enter number of iterations: "))
+lower_bound = float(input("Enter lower bound for search space: "))
+upper_bound = float(input("Enter upper bound for search space: "))
+
+def f(x):
+    return eval(func_str, {"x": x, "np": np})
+
+grid = np.random.uniform(lower_bound, upper_bound, (grid_size, grid_size))
+fitness = f(grid)
+
+for itr in range(iterations):
+    new_grid = grid.copy()
+    for i in range(grid_size):
+        for j in range(grid_size):
+            i_min, i_max = max(0, i-1), min(grid_size, i+2)
+            j_min, j_max = max(0, j-1), min(grid_size, j+2)
+            neighborhood = grid[i_min:i_max, j_min:j_max]
+            neighbor_fitness = f(neighborhood)
+            best_neighbor = neighborhood[np.unravel_index(np.argmin(neighbor_fitness), neighbor_fitness.shape)]
+            new_grid[i, j] = (grid[i, j] + best_neighbor) / 2
+
+    grid = new_grid
+    fitness = f(grid)
+
+best_value = grid[np.unravel_index(np.argmin(fitness), fitness.shape)]
+best_fitness = np.min(fitness)
+print("\nBest solution found:")
+print("x =", best_value)
+print("Fitness =", best_fitness)
